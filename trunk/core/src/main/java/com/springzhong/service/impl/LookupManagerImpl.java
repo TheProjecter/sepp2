@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.springzhong.dao.IDaoInterface;
+import com.springzhong.dao.ILookupDao;
 import com.springzhong.model.LabelValue;
 import com.springzhong.model.Role;
 import com.springzhong.service.LookupManager;
@@ -22,7 +22,7 @@ import com.springzhong.service.LookupManager;
 @Repository
 public class LookupManagerImpl implements LookupManager {
     @Autowired
-    IDaoInterface dao;
+    ILookupDao dao;
 
     /**
      * {@inheritDoc}
