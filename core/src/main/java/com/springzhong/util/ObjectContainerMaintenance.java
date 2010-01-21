@@ -18,7 +18,7 @@ import com.springzhong.model.Role;
 import com.springzhong.model.User;
 
 @Repository
-public class ObjectContainerMaintenance implements ObjectContainerMaintenanceInterface{
+public class ObjectContainerMaintenance implements IObjectContainerMaintenance{
 	private Log log = LogFactory.getLog(ObjectContainerMaintenance.class);
 	private Db4oTemplate db4oTemplate;
 

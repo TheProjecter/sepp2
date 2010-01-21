@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.db4o.ObjectSet;
 import com.springzhong.Constants;
 import com.springzhong.model.Role;
-import com.springzhong.util.ObjectContainerMaintenanceInterface;
+import com.springzhong.util.IObjectContainerMaintenance;
 
 public class Db4oRoleDaoTest extends Db4oBaseDaoTestCase {
 	
@@ -20,10 +20,10 @@ public class Db4oRoleDaoTest extends Db4oBaseDaoTestCase {
     private IRoleDao roleDaoDb4o;
     
     @Autowired
-    private IDaoInterface lookupDaoDb4o;
+    private ILookupDao lookupDaoDb4o;
        
     @Autowired
-	private ObjectContainerMaintenanceInterface oDatabaseMaintenance;
+	private IObjectContainerMaintenance oDatabaseMaintenance;
 	
     @Test
     public void testGetRoleInvalid() throws Exception {

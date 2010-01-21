@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class Db4oLookupDaoTest extends Db4oBaseDaoTestCase {
 	@Autowired
-    IDaoInterface lookupDaoDb4o;
+    ILookupDao lookupDaoDb4o;
     
     @Test
     public void testGetRoles() {

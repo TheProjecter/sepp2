@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springmodules.db4o.Db4oTemplate;
 
 import com.db4o.ObjectContainer;
-import com.springzhong.dao.IDaoInterface;
+import com.springzhong.dao.ILookupDao;
 import com.springzhong.model.Role;
 
 /**
@@ -18,7 +18,7 @@ import com.springzhong.model.Role;
  * @author <a href="mailto:davidmahorse@gmail.com">Spring Zhong</a>
  */
 @Repository
-public class LookupDaoDb4o extends GenericDaoDb4o<Role> implements IDaoInterface {
+public class LookupDaoDb4o extends GenericDaoDb4o<Role> implements ILookupDao {
     private Log log = LogFactory.getLog(LookupDaoDb4o.class);
     private Db4oTemplate db4oTemplate;
     
