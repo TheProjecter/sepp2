@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.springzhong</groupId>
     <artifactId>sepp</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>AppFuse JSF Application</name>
-    <url>http://www.mycompany.com</url>
+    <url>http://springzhong.vicp.net</url>
 
     <prerequisites>
         <maven>2.2.1</maven>
@@ -51,42 +51,6 @@
                 </dependencies>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.2</version>
-                <configuration>
-                    <source>1.5</source>
-                    <verbose>true</verbose>
-                    <complianceLevel>1.5</complianceLevel>
-                    <showWeaveInfo>true</showWeaveInfo>
-                    <aspectLibraries>
-                        <aspectLibrary>
-                            <groupId>org.springframework</groupId>
-                            <artifactId>spring-aspects</artifactId>
-                        </aspectLibrary>
-                    </aspectLibraries>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjrt</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjtools</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
@@ -96,7 +60,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.7</version>
+                <version>2.5.1</version>
                 <configuration>
                     <additionalProjectnatures>
                         <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
@@ -119,180 +83,13 @@
                     <useFullNames>false</useFullNames>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <components>
-                        <component>
-                            <name>hbm2ddl</name>
-                            <implementation>annotationconfiguration</implementation>
-                            <!-- Use 'jpaconfiguration' if you're using JPA. -->
-                            <!--<implementation>jpaconfiguration</implementation>-->
-                        </component>
-                    </components>
-                    <componentProperties>
-                        <drop>true</drop>
-                        <jdk5>true</jdk5>
-                        <propertyfile>target/classes/jdbc.properties</propertyfile>
-                        <skip>${skipTests}</skip>
-                    </componentProperties>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>hbm2ddl</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>${jdbc.groupId}</groupId>
-                        <artifactId>${jdbc.artifactId}</artifactId>
-                        <version>${jdbc.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>dbunit-maven-plugin</artifactId>
-                <version>1.0-beta-3</version>
-                <configuration>
-                    <dataTypeFactoryName>${dbunit.dataTypeFactoryName}</dataTypeFactoryName>
-                    <driver>${jdbc.driverClassName}</driver>
-                    <username>${jdbc.username}</username>
-                    <password>${jdbc.password}</password>
-                    <url>${jdbc.url}</url>
-                    <src>src/test/resources/sample-data.xml</src>
-                    <type>${dbunit.operation.type}</type>
-                    <schema>${dbunit.schema}</schema>
-                    <skip>${skipTests}</skip>
-                    <transaction>true</transaction>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>operation</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <!-- Runs before integration tests and jetty:run-war -->
-                        <id>test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>operation</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>${jdbc.groupId}</groupId>
-                        <artifactId>${jdbc.artifactId}</artifactId>
-                        <version>${jdbc.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.21</version>
-                <configuration>
-                    <contextPath>/</contextPath>
-                    <scanIntervalSeconds>3</scanIntervalSeconds>
-                    <scanTargetPatterns>
-                        <scanTargetPattern>
-                            <directory>src/main/webapp/WEB-INF</directory>
-                            <excludes>
-                                <exclude>**/*.jsp</exclude>
-                                <exclude>**/*.xhtml</exclude>
-                            </excludes>
-                            <includes>
-                                <include>**/*.properties</include>
-                                <include>**/*.xml</include>
-                            </includes>
-                        </scanTargetPattern>
-                    </scanTargetPatterns>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>native2ascii-maven-plugin</artifactId>
-                <version>1.0-alpha-1</version>
-                <configuration>
-                    <dest>target/classes</dest>
-                    <src>src/main/resources</src>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>native2ascii-utf8</id>
-                        <goals>
-                            <goal>native2ascii</goal>
-                        </goals>
-                        <configuration>
-                            <encoding>UTF8</encoding>
-                            <includes>ApplicationResources_ko.properties,
-                                ApplicationResources_no.properties,
-                                ApplicationResources_tr.properties,
-                                ApplicationResources_zh*.properties</includes>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>native2ascii-8859_1</id>
-                        <goals>
-                            <goal>native2ascii</goal>
-                        </goals>
-                        <configuration>
-                            <encoding>8859_1</encoding>
-                            <includes>ApplicationResources_de.properties,
-                                ApplicationResources_fr.properties,
-                                ApplicationResources_nl.properties,
-                                ApplicationResources_pt*.properties</includes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>ApplicationResources_de.properties</exclude>
-                    <exclude>ApplicationResources_fr.properties</exclude>
-                    <exclude>ApplicationResources_ko.properties</exclude>
-                    <exclude>ApplicationResources_nl.properties</exclude>
-                    <exclude>ApplicationResources_no.properties</exclude>
-                    <exclude>ApplicationResources_pt*.properties</exclude>
-                    <exclude>ApplicationResources_tr.properties</exclude>
-                    <exclude>ApplicationResources_zh*.properties</exclude>
-                    <exclude>applicationContext-resources.xml</exclude>
-                </excludes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>applicationContext-resources.xml</include>
-                </includes>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-            </testResource>
-            <testResource>
-                <directory>src/main/webapp</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </testResource>
-        </testResources>
     </build>
+
+    <modules>
+        <module>core</module>
+        <module>web</module>
+    </modules>
 
     <repositories>
         <repository>
@@ -328,81 +125,19 @@
             <version>${jdbc.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.sun.facelets</groupId>
-            <artifactId>jsf-facelets</artifactId>
-            <version>${facelets.version}</version>
+            <groupId>spring-modules</groupId>
+            <artifactId>spring-modules</artifactId>
+            <version>0.9</version>
         </dependency>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>${commons.beanutils.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>${commons.collections.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>${commons.dbcp.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>xercesImpl</artifactId>
-                    <groupId>xerces</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-collections</artifactId>
-                    <groupId>commons-collections</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons.io.version}</version>
+            <groupId>db4o</groupId>
+            <artifactId>db4o</artifactId>
+            <version>7.12</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${commons.lang.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.4.GA</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>${javamail.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>${jpa.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>${servlet.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${jstl.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>${jsp.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -422,186 +157,6 @@
             <version>${log4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>net.java.dev.ajax4jsf</groupId>
-            <artifactId>ajax4jsf</artifactId>
-            <version>${ajax4jsf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-            <version>${ehcache.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-web</artifactId>
-            <version>${ehcache.web.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>ehcache</artifactId>
-                    <groupId>net.sf.ehcache</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.jsf-comp</groupId>
-            <artifactId>acegi-jsf</artifactId>
-            <version>${acegijsf.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>acegi-security</artifactId>
-                    <groupId>org.acegisecurity</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>opensymphony</groupId>
-            <artifactId>sitemesh</artifactId>
-            <version>${sitemesh.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-            <version>${cxf.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-core</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-web</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>wstx-asl</artifactId>
-                    <groupId>org.codehaus.woodstox</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-common-utilities</artifactId>
-            <version>${cxf.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-beans</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-context</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-core</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-web</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>wstx-asl</artifactId>
-                    <groupId>org.codehaus.woodstox</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.myfaces.core</groupId>
-            <artifactId>myfaces-api</artifactId>
-            <version>${myfaces.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.myfaces.core</groupId>
-            <artifactId>myfaces-impl</artifactId>
-            <version>${myfaces.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.myfaces.tomahawk</groupId>
-            <artifactId>tomahawk</artifactId>
-            <version>${myfaces.tomahawk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shale</groupId>
-            <artifactId>shale-validator</artifactId>
-            <version>${shale.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shale</groupId>
-            <artifactId>shale-test</artifactId>
-            <version>${shale.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-jaxrs</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.woodstox</groupId>
-            <artifactId>woodstox-core-asl</artifactId>
-            <version>4.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.compass-project</groupId>
-            <artifactId>compass</artifactId>
-            <version>${compass.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.directwebremoting</groupId>
-            <artifactId>dwr</artifactId>
-            <version>${dwr.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <version>${hibernate.annotations.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>ejb3-persistence</artifactId>
-                    <groupId>org.hibernate</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
-            <version>${hibernate.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>ehcache</artifactId>
-                    <groupId>net.sf.ehcache</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock</artifactId>
             <version>${jmock.version}</version>
@@ -614,45 +169,10 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -665,51 +185,10 @@
             <version>${spring.security.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>${spring.security.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-web</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-support</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.subethamail</groupId>
             <artifactId>subethasmtp-wiser</artifactId>
             <version>${wiser.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.tuckey</groupId>
-            <artifactId>urlrewritefilter</artifactId>
-            <version>${urlrewrite.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>struts-menu</groupId>
-            <artifactId>struts-menu</artifactId>
-            <version>${struts.menu.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>xml-apis</artifactId>
-                    <groupId>xml-apis</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>taglibs</groupId>
-            <artifactId>standard</artifactId>
-            <version>${jstl.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>velocity</groupId>
-            <artifactId>velocity</artifactId>
-            <version>${velocity.version}</version>
         </dependency>
     </dependencies>
 
@@ -746,97 +225,6 @@
     </reporting>
 
     <profiles>
-        <profile>
-            <id>integration-test</id>
-            <activation>
-                <property>
-                    <name>!skipTests</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.cargo</groupId>
-                        <artifactId>cargo-maven2-plugin</artifactId>
-                        <version>${cargo.version}</version>
-                        <configuration>
-                            <wait>${cargo.wait}</wait>
-                            <container>
-                                <containerId>${cargo.container}</containerId>
-                                <home>${cargo.container.home}</home>
-                                <zipUrlInstaller>
-                                    <url>${cargo.container.url}</url>
-                                    <installDir>${installDir}</installDir>
-                                </zipUrlInstaller>
-                            </container>
-                            <configuration>
-                                <home>${project.build.directory}/${cargo.container}/container</home>
-                                <properties>
-                                    <cargo.hostname>${cargo.host}</cargo.hostname>
-                                    <cargo.servlet.port>${cargo.port}</cargo.servlet.port>
-                                </properties>
-                            </configuration>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>start-container</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>start</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>stop-container</id>
-                                <phase>post-integration-test</phase>
-                                <goals>
-                                    <goal>stop</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.3</version>
-                        <configuration>
-                            <tasks>
-                                <taskdef resource="webtest_base_relaxed.taskdef">
-                                    <classpath refid="maven.test.classpath" />
-                                </taskdef>
-                                <mkdir dir="target/webtest-data" />
-                                <!-- Delete old results file if it exists -->
-                                <delete file="target/webtest-data/web-tests-result.xml" />
-                                <!-- This is so the default will be used if no test case is specified -->
-                                <property name="test" value="run-all-tests" />
-                                <property name="i18n.classpath" value="${basedir}/target/classes" />
-                                <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'</echo>
-                                <ant antfile="src/test/resources/web-tests.xml" target="${test}">
-                                    <property name="user.language" value="${user.language}" />
-                                    <property name="webapp.name" value="${project.build.finalName}" />
-                                    <property name="host" value="${cargo.host}" />
-                                    <property name="port" value="${cargo.port}" />
-                                </ant>
-                            </tasks>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.canoo.webtest</groupId>
-                                <artifactId>webtest</artifactId>
-                                <version>${webtest.version}</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
         <!-- ================= Production Settings Profile ================= -->
         <!-- Use "-P prod" when you want to use the settings in this profile -->
         <!-- =============================================================== -->
@@ -854,8 +242,12 @@
                     </plugin>
                 </plugins>
             </build>
+    	    <modules>
+            	<module>core</module>
+                <module>web</module>
+            </modules>
         </profile>
-        
+
         <!-- ================= Database Profiles ================= -->
         <profile>
             <id>derby</id>
@@ -873,7 +265,7 @@
         <profile>
             <id>h2</id>
             <properties>
-                <dbunit.dataTypeFactoryName>org.dbunit.ext.hsqldb.HsqldbDataTypeFactory</dbunit.dataTypeFactoryName>
+                <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>
                 <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
                 <jdbc.groupId>com.h2database</jdbc.groupId>
                 <jdbc.artifactId>h2</jdbc.artifactId>
@@ -964,8 +356,8 @@
     <properties>
         <!-- Application settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <copyright.year>2009</copyright.year>
-        <dao.framework>hibernate</dao.framework>
+        <copyright.year>2010</copyright.year>
+        <dao.framework>db4o</dao.framework>
         <web.framework>jsf</web.framework>
         <amp.genericCore>true</amp.genericCore>
         <amp.fullSource>true</amp.fullSource>
@@ -1017,7 +409,7 @@
         <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
         <jdbc.url>jdbc:mysql://localhost/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8</jdbc.url>
         <jdbc.username>root</jdbc.username>
-        <jdbc.password></jdbc.password>
+        <jdbc.password/>
     
         <!-- Properties calculated by AppFuse when running full-source plugin -->
         <commons.beanutils.version>1.8.1</commons.beanutils.version>
