@@ -20,7 +20,8 @@ public class GenericDaoDb4o<T> implements IGenericDao<T> {
 	private Class<T> persistentClass;
 	private Db4oTemplate db4oTemplate;
 	private ObjectIdSequenceNo objectIdSequenceNo;
-
+	private final String s = "oi";
+	
 	public GenericDaoDb4o()
 	{
 		
@@ -34,7 +35,6 @@ public class GenericDaoDb4o<T> implements IGenericDao<T> {
 			ObjectSet result = db4oTemplate.getObjectContainer()
 					.queryByExample(proto);
 			if (result.size() <= 0) {
-				String s = "oi";
 				synchronized (s) {
 					// if another thread is waiting enter this code?
 					result = db4oTemplate.getObjectContainer().queryByExample(
