@@ -13,7 +13,6 @@ import com.db4o.query.Query;
 import com.springzhong.dao.IRoleDao;
 import com.springzhong.model.ObjectIdSequenceNo;
 import com.springzhong.model.Role;
-import com.springzhong.model.User;
 
 /**
  * This class interacts with Spring's HibernateTemplate to save/delete and
@@ -24,6 +23,8 @@ import com.springzhong.model.User;
 @Repository
 public class RoleDaoDb4o extends GenericDaoDb4o<Role> implements IRoleDao {
 
+	private final String s = "oi";
+	
 	@Autowired
 	public void setObjectContainer(ObjectContainer objectContainer) {
 		Db4oTemplate db4oTemplate = new Db4oTemplate(objectContainer);
@@ -74,7 +75,6 @@ public class RoleDaoDb4o extends GenericDaoDb4o<Role> implements IRoleDao {
 	 */
 	@Override
 	public Role save(Role object){
-		String s = "oi";
 		synchronized (s) {
 			if (object.getId() == null) {
 				ObjectIdSequenceNo oi = getObjectIdSequenceNo();

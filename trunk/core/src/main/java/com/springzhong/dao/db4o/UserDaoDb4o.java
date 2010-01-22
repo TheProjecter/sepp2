@@ -28,6 +28,8 @@ import com.springzhong.service.UserExistsException;
 public class UserDaoDb4o extends GenericDaoDb4o<User> implements
 		IUserDao, UserDetailsService {
 
+	private final String s = "oi";
+	
 	/**
 	 * 
 	 */
@@ -99,7 +101,6 @@ public class UserDaoDb4o extends GenericDaoDb4o<User> implements
 			log.debug("user's id: " + user.getId());
 
 		if (user.getId() == null) {
-			String s = "oi";
 			synchronized (s) {
 				ObjectIdSequenceNo oi = getObjectIdSequenceNo();
 				oi.userIdSequenceNo++;
