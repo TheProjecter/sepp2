@@ -9,4 +9,4 @@
 = Details =
   At first, sepp is just a client-server gui application on whick I play with technologies.But with my knowledge accumulation, I realize this exchanging technologies maybe the cornerstone of future social transactions. Should I name this future social as  the protype of "Matrix"(Sci-fi movie)?
   The technologies of sepp look very simple. I will describe each detail article by article.
-  Overall, sepp will allow you to secure the exchange of information on the Internet, and its confidentiality is totally controlled by you, you embody the spirit of freedom, its entirely from the principle of confidentiality of mathematicians, theoretical, rather than through a third party such as that The government to guarantee.
+  Overall, sepp will allow you to secure the exchange of information on the Internet, and its confidentiality is totally controlled by you, sepp's idea is from  the spirit of freedom, its confidentiality is entirely from theories of mathematicians, rather than through a third party such as that the government to guarantee.
