@@ -1,0 +1,2 @@
+Secret-information Exchanging for Point to Point.
+Sepp will allow you to secure the exchange of information on the Internet, and its confidentiality is totally controlled by you, sepp's idea is from the spirit of freedom, its confidentiality is entirely from theories of mathematicians, rather than through a third party such as that the government to guarantee.
